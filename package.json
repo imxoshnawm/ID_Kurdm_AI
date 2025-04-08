@@ -1,0 +1,11 @@
+{
+  "name": "id-kurdm-ai",
+  "version": "1.0.0",
+  "description": "Kurdish AI Website",
+  "scripts": {
+    "start": "serve -s ."
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}
