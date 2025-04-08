@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Kurd AI - گۆڕینی وشەی نهێنی</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="module">
+    // Import the functions you need from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+    import { 
+      getAuth, 
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIoNvW1wHk-5qlTGrnnlfMIGZfEN-ucg8",
+      authDomain: "id-kurdm-ai.firebaseapp.com",
+      projectId: "id-kurdm-ai",
+      storageBucket: "id-kurdm-ai.firebasestorage.app",
+      messagingSenderId: "500724816364",
+      appId: "1:500724816364:web:0159636245557a07c7c8c9",
+      measurementId: "G-TV21Q9H80V"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+
+    /**
+     * Send password reset email through Firebase
+     */
+    window.resetPassword = function() {
+      const email = document.getElementById('reset-email').value;
+      const successMessage = document.getElementById('reset-success');
+      const errorMessage = document.getElementById('reset-error');
+      
+      // Hide any previous messages
+      successMessage.style.display = 'none';
+      errorMessage.style.display = 'none';
+      
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          // Password reset email sent successfully
+          successMessage.style.display = 'block';
+          document.getElementById('reset-form').reset();
+        })
+        .catch((error) => {
+          // Error occurred
+          errorMessage.textContent = getErrorMessage(error.code);
+          errorMessage.style.display = 'block';
+        });
+    }
+    
+    /**
+     * Get localized error message
+     * @param {string} errorCode - Firebase error code
+     * @return {string} Localized error message
+     */
+    function getErrorMessage(errorCode) {
+      switch(errorCode) {
+        case 'auth/invalid-email':
+          return "فۆرماتی ئیمەیڵ هەڵەیە";
+        case 'auth/user-not-found':
+          return "ئەم ئیمەیڵە تۆمار نەکراوە";
+        case 'auth/too-many-requests':
+          return "زۆر هەوڵدان، تکایە دواتر هەوڵبدەوە";
+        default:
+          return "هەڵەیەک ڕوویدا، تکایە دواتر هەوڵبدەوە";
+      }
+    }
+
+    // لە Forgotpass.html دا، ئەم گۆڕانکارییانە بکە
+
+window.resetPassword = function() {
+  const email = document.getElementById('reset-email').value;
+  const successMessage = document.getElementById('reset-success');
+  const errorMessage = document.getElementById('reset-error');
+  
+  // Hide any previous messages
+  successMessage.style.display = 'none';
+  errorMessage.style.display = 'none';
+  
+  // دانانی ڕێکخستنەکان بۆ لینکی گۆڕینی وشەی نهێنی
+  const actionCodeSettings = {
+    url: 'https://id-kurdm-ai.firebaseapp.com/ResetPassword.html', // ئەم لینکە بە لینکی سایتەکەت بگۆڕە
+    handleCodeInApp: true  // ئەمە گرنگە بۆ ئەوەی لە ئاپەکەت مامەڵە لەگەڵ کۆدەکە بکرێت
+  };
+  
+  sendPasswordResetEmail(auth, email, actionCodeSettings)
+    .then(() => {
+      // Password reset email sent successfully
+      successMessage.style.display = 'block';
+      document.getElementById('reset-form').reset();
+    })
+    .catch((error) => {
+      // Error occurred
+      errorMessage.textContent = getErrorMessage(error.code);
+      errorMessage.style.display = 'block';
+    });
+}
+  </script>
+</head>
+<body>
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <div class="logo-container">
+        <div class="logo-star"></div>
+      </div>
+      <div class="logo-text">ID Kurd AI</div>
+    </div>
+
+    <div class="reset-password-container">
+      <h2>گۆڕینی وشەی نهێنی</h2>
+      <p class="reset-info">ئیمەیڵەکەت بنووسە بۆ وەرگرتنی لینکی گۆڕینی وشەی نهێنی</p>
+      
+      <div id="reset-success" class="success-message" style="display:none;">
+        ئیمەیڵی گۆڕینی وشەی نهێنی نێردرا. تکایە بڕوانە ئیمەیڵەکەت و شوێن رێنماییەکان بکەوە.
+      </div>
+      
+      <div id="reset-error" class="error-message" style="display:none;"></div>
+      
+      <form id="reset-form" onsubmit="event.preventDefault(); resetPassword();">
+        <div class="input-group">
+          <label for="reset-email">ئیمەیڵ</label>
+          <input type="email" id="reset-email" placeholder="ئیمەیڵەکەت بنووسە" required>
+          <div class="input-icon">✉️</div>
+        </div>
+        
+        <button type="submit" class="btn">ناردنی لینکی گۆڕینی وشەی نهێنی</button>
+        
+        <div class="back-to-login">
+          <a href="login.html">گەڕانەوە بۆ چوونەژوورەوە</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

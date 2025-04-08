@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مێژوای کوردستان</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* تایبەتمەندییە زیادکراوەکان بۆ پەڕەی مێژوو */
+    .history-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .history-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .history-section:hover {
+      transform: translateY(-5px);
+    }
+    
+    .history-section h3 {
+      color: var(--kurdish-green);
+      border-bottom: 2px solid var(--kurdish-yellow);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .history-image-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .history-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    
+    .history-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .history-timeline {
+      position: relative;
+      margin: 40px 0;
+      padding-left: 30px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 30px;
+      padding-left: 20px;
+    }
+    
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      background: var(--kurdish-red);
+      border-radius: 50%;
+    }
+    
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 15px;
+      width: 2px;
+      height: calc(100% + 20px);
+      background: var(--kurdish-yellow);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .timeline-date {
+      font-weight: bold;
+      color: var(--kurdish-red);
+      margin-bottom: 5px;
+    }
+    
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    
+    
+    /* شریتی سەردان */
+    .visit-counter {
+      background: rgba(255, 203, 5, 0.9);
+      padding: 10px 20px;
+      border-radius: 50px;
+      display: inline-block;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* جۆری زانیاری */
+    .info-tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background: var(--kurdish-yellow);
+      color: #333;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+    
+    /* تایبەتمەندی ڕوون */
+    .highlight {
+      background: rgba(255, 203, 5, 0.2);
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    
+    .note-box {
+      background: rgba(237, 28, 36, 0.1);
+      border-left: 4px solid var(--kurdish-red);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+  
+  <!-- ناوبەر -->
+  <nav id="menu">
+    <div class="logo">ID Kurdm AI</div>
+    <ul>
+      <li><a href="../menu.html"><i class="fas fa-home"></i>سەرەکی</a></li>
+      <li><a href="../about/about.html"><i class="fas fa-user"></i> دەربارە</a></li>
+      <li><a href="../translator/translator.html"><i class="fas fa-language"></i> وەرگێڕ</a></li>
+      <li><a href="../chatbot/menuchatbot.html"><i class="fas fa-comments"></i> چات بۆت</a></li>
+      <li><a href="../history/history.html"><i class="fas fa-history"></i> مێژوو</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <h2>مێژوای کوردستان</h2>
+    
+    <div class="history-container">
+      <div class="row">
+        <div class="col-md-8">
+          <!-- بەشی سەرەکی زانیاریەکان -->
+          <div class="history-section">
+            <h3>پێشەکی</h3>
+            <div class="info-tag">گشتی</div>
+            <div class="info-tag">مێژووی کۆن</div>
+            
+            <p>
+              کوردستان، وەکو ناوچەیەکی کۆن و باستانی، مێژوویی پڕ و پێکهاتەی چالاکی و پەیوەندیدانی جیاواز لە نێوان کەس و کۆمەڵگایەکان هەیە.  
+              ئەم ناوچەیە بە چەند سەرجەم پەیوەندی و بەردەوامیەکی مێژوویی بەرز، گەورەکردنەوەی کەسایەتییەتی و نووسینەوەی ڕووداوەکان، وشێوازێکی تایبەتی هەیە.
+            </p>
+            
+            <p>
+              کوردستان ناوچەیەکی ستراتیجی لە نێوان ڕۆژهەڵاتی ناوەڕاستدایە و بە درێژایی مێژوو بووەتە ناوەندی چەندین شارستانیەت و کولتووری جیاواز. گەلی کورد لە کۆنترین گەلەکانی ناوچەکەن 
+              کە بە درێژایی هەزاران ساڵ لەم ناوچەیەدا ژیاون و کولتوور و زمانی خۆیان پاراستووە.
+            </p>
+            
+            <div class="history-image-container">
+              <img src="/api/placeholder/400/250" alt="وێنەی سروشتی کوردستان" class="history-image">
+              <img src="/api/placeholder/400/250" alt="خەڵکی کورد لە ڕابردوودا" class="history-image">
+            </div>
+          </div>
+          
+          <div class="history-section">
+            <h3>سەردەمی کۆن</h3>
+            <div class="info-tag">پێش زاین</div>
+            <div class="info-tag">میدیا</div>
+            
+            <p>
+              مێژووی کورد دەگەڕێتەوە بۆ چەندین هەزار ساڵ پێش ئێستا. لە سەرچاوە مێژووییەکاندا باس لە نەتەوەکان و شارستانیەتە کۆنەکانی ناوچەکە دەکات 
+              وەک میدیا، میتانی، و هوریەکان کە پێشینەی کوردی ئەمڕۆن.
+            </p>
+            
+            <p>
+              ئیمپراتۆریەتی میدیا (٦٧٨-٥٤٩ پێش زایین) یەکێک بوو لە گرنگترین دەوڵەتەکانی ناوچەکە، کە بەشێکی زۆری کوردستانی ئێستای لەخۆ دەگرت.
+              میدیەکان توانیان ئیمپراتۆریەتی ئاشووری ڕووخێنن و دەسەڵاتیان بەسەر ناوچەکەدا بسەپێنن.
+            </p>
+            
+            <div class="note-box">
+              تێبینی: لە چەندین کەنیسەی کۆنی سۆمەری و بابلیدا باس لە خەڵکانی "کاردۆ" کراوە کە پێیان وایە پەیوەندیان بە کوردی ئەمڕۆوە هەیە.
+            </div>
+            
+            <div class="history-image-container">
+              <img src="/api/placeholder/400/250" alt="نەخشەی ئیمپراتۆریەتی میدیا" class="history-image">
+            </div>
+          </div>
+          
+          <div class="history-section">
+            <h3>سەردەمی ئیسلامی</h3>
+            <div class="info-tag">سەدەکانی ناوەڕاست</div>
+            <div class="info-tag">میرنشینەکان</div>
+            
+            <p>
+              لە سەدەی ٧ـەمدا، ناوچەی کوردستان کەوتە ژێر کاریگەری ئایینی ئیسلام. لەو سەردەمەدا، کوردەکان رۆڵێکی گرنگیان لە جیهانی ئیسلامیدا بینی، بە تایبەتی 
+              لە بواری زانست، ئەدەب، فەلسەفە و سەربازیدا.
+            </p>
+            
+            <p>
+              لە سەدەکانی ناوەڕاستدا چەندین میرنشینی کوردی سەربەخۆ دروست بوون وەک:
+            </p>
+            
+            <div class="history-timeline">
+              <div class="timeline-item">
+                <div class="timeline-date">٩٨٣-١٠٩٥</div>
+                <div class="timeline-content">
+                  <strong>میرنشینی مەروانی</strong> - لە ناوچەی دیاربەکر و میافارقین (سیلڤان)
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-date">١١٦٩-١٣٧٨</div>
+                <div class="timeline-content">
+                  <strong>میرنشینی ئەیووبی</strong> - بە سەرکردایەتی سەلاحەدینی ئەیووبی کە میسر و شام و حیجازی گرتەوە
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-date">١٥١٤-١٦٩٣</div>
+                <div class="timeline-content">
+                  <strong>میرنشینی بابان</strong> - لە ناوچەی سلێمانی ئێستا
+                </div>
+              </div>
+              
+              <div class="timeline-item">
+                <div class="timeline-date">١٥١٤-١٨٣٤</div>
+                <div class="timeline-content">
+                  <strong>میرنشینی سۆران</strong> - لە ناوچەی هەولێر و ڕواندز
+                </div>
+              </div>
+            </div>
+            
+            <div class="history-image-container">
+              <img src="/api/placeholder/400/250" alt="سەلاحەدینی ئەیووبی" class="history-image">
+              <img src="/api/placeholder/400/250" alt="قەڵای ڕواندز" class="history-image">
+            </div>
+          </div>
+          
+          <div class="history-section">
+            <h3>سەردەمی نوێ</h3>
+            <div class="info-tag">سەدەی ٢٠</div>
+            <div class="info-tag">کۆماری کوردستان</div>
+            
+            <p>
+              دوای جەنگی جیهانی یەکەم و ڕووخانی ئیمپراتۆریەتی عوسمانی، کوردستان دابەش کرا بەسەر چەند دەوڵەتێکدا. یەکەم هەوڵی دروستکردنی دەوڵەتی سەربەخۆی کوردی 
+              لە ڕێککەوتننامەی سیڤەر (١٩٢٠) دا هاتبوو، بەڵام دواتر لە ڕێککەوتننامەی لۆزان (١٩٢٣) دا پشتگوێ خرا.
+            </p>
+            
+            <p>
+              لە ساڵی ١٩٤٦ دا <span class="highlight">کۆماری کوردستان</span> لە مەهاباد بە سەرۆکایەتی قازی محەمەد دامەزرا، کە یەکەمین کۆماری کوردی بوو لە مێژوودا. 
+              بەڵام دوای ١١ مانگ ئەم کۆمارە ڕووخا و سەرۆکەکەی لە سێدارە درا.
+            </p>
+            
+            <div class="history-image-container">
+              <img src="/api/placeholder/400/250" alt="قازی محەمەد و کۆماری کوردستان" class="history-image">
+              <img src="/api/placeholder/400/250" alt="ئاڵای کوردستان" class="history-image">
+            </div>
+          </div>
+          
+          <div class="history-section">
+            <h3>کوردستانی عێراق</h3>
+            <div class="info-tag">هەرێمی کوردستان</div>
+            <div class="info-tag">سەردەمی هاوچەرخ</div>
+            
+            <p>
+              دوای ڕاپەڕینی ١٩٩١ی گەلی کوردستانی عێراق، ناوچە کوردنشینەکانی باکووری عێراق توانیان خۆبەڕێوەبەری وەربگرن. لە ١٩٩٢دا یەکەم هەڵبژاردنی پەرلەمانی کوردستان بەڕێوەچوو.
+            </p>
+            
+            <p>
+              لە ساڵی ٢٠٠٥ دا، دەستووری نوێی عێراق دانی بە هەرێمی کوردستان وەک هەرێمێکی فیدراڵی نا لە چوارچێوەی عێراقدا، کە ئەمە گەورەترین دەستکەوتی سیاسی کورد بوو لە مێژووی هاوچەرخدا.
+            </p>
+            
+            <div class="history-image-container">
+              <img src="/api/placeholder/400/250" alt="پەرلەمانی کوردستان" class="history-image">
+              <img src="/api/placeholder/400/250" alt="شاری هەولێر - پایتەختی هەرێمی کوردستان" class="history-image">
+            </div>
+          </div>
+          
+
+          <div class="design-note">   ID Kurd AI - تەکنەلۆژیای کوردی بۆ داهاتوویەکی گەشاوە </div>
+        </div>
+  
+  <script src="script.js"></script>
+ 
+
+  
+  </body>
+  </html>
