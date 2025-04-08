@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "publics",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,16 +12,9 @@
         "destination": "ResetPassword.html"
       },
       {
-        "source": "/api/**",
-        "function": "api"
-      },
-      {
         "source": "**",
         "destination": "login.html"
       }
     ]
-  },
-  "functions": {
-    "source": "functions"
   }
 }
