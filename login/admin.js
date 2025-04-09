@@ -693,7 +693,7 @@ function showError(message) {
  * گەڕانەوە بۆ پەڕەی لۆگین
  */
 function redirectToLogin() {
-  window.location.href = 'index.html';
+  window.location.href = '../index.html';
 }
 
 /**
