@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Kurd AI - چوونەژوورەوەی هۆشی دەستکرد کوردی</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="module">
+    // Import the functions you need from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      setDoc, 
+      getDoc, 
+      collection,
+      addDoc,
+      updateDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDIoNvW1wHk-5qlTGrnnlfMIGZfEN-ucg8",
+      authDomain: "id-kurdm-ai.firebaseapp.com",
+      projectId: "id-kurdm-ai",
+      storageBucket: "id-kurdm-ai.firebasestorage.app",
+      messagingSenderId: "500724816364",
+      appId: "1:500724816364:web:0159636245557a07c7c8c9",
+      measurementId: "G-TV21Q9H80V"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    const db = getFirestore(app);
+
+    /**
+     * Save user data to Firestore
+     * @param {string} userId - Firebase user ID
+     * @param {string} fullName - User's full name
+     * @param {string} email - User's email address
+     */
+    async function saveUserDataToFirestore(userId, fullName, email) {
+      try {
+        await setDoc(doc(db, "users", userId), {
+          fullName: fullName,
+          email: email,
+          createdAt: serverTimestamp(),
+          lastLogin: serverTimestamp(),
+          userType: "standard"
+        });
+        console.log("User data saved successfully");
+      } catch (error) {
+        console.error("Error saving user data: ", error);
+      }
+    }
+
+    /**
+     * Update last login timestamp
+     * @param {string} userId - Firebase user ID
+     */
+    async function updateLastLogin(userId) {
+      try {
+        await updateDoc(doc(db, "users", userId), {
+          lastLogin: serverTimestamp()
+        });
+      } catch (error) {
+        console.error("Error updating last login: ", error);
+      }
+    }
+
+    // Check if user is already logged in - REMOVED AUTO-REDIRECT
+    // Let script.js handle showing login status message
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, but we'll let script.js handle it
+        updateLastLogin(user.uid); // Update last login timestamp
+      }
+    });
+
+    /**
+     * Login function - Signs in with Firebase auth
+     */
+    window.loginWithFirebase = function() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const errorMessage = document.getElementById('login-error');
+      
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          updateLastLogin(user.uid); // Update last login timestamp
+          window.location.href = "publics/menu.html";
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          errorMessage.style.display = 'block';
+          
+          switch(errorCode) {
+            case 'auth/invalid-credential':
+              errorMessage.textContent = "ناوی بەکارهێنەر یان وشەی نهێنی هەڵەیە";
+              break;
+            case 'auth/user-not-found':
+              errorMessage.textContent = "ئەم ئیمەیڵە بوونی نییە";
+              break;
+            case 'auth/wrong-password':
+              errorMessage.textContent = "وشەی نهێنی هەڵەیە";
+              break;
+            default:
+              errorMessage.textContent = "هەڵەیەک ڕوویدا، تکایە دواتر هەوڵبدەوە";
+          }
+        });
+    }
+
+    /**
+     * Register function - Creates new user with Firebase auth
+     */
+    window.registerWithFirebase = function() {
+      const fullName = document.getElementById('register-fullname').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      const errorMessage = document.getElementById('register-error');
+      
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        errorMessage.textContent = "وشەی نهێنی و دووبارەکردنەوەی یەکسان نین";
+        errorMessage.style.display = 'block';
+        return;
+      }
+      
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up 
+          const user = userCredential.user;
+          // Save user profile info to Firestore
+          saveUserDataToFirestore(user.uid, fullName, email);
+          window.location.href = "publics/menu.html";
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          errorMessage.style.display = 'block';
+          
+          switch(errorCode) {
+            case 'auth/email-already-in-use':
+              errorMessage.textContent = "ئەم ئیمەیڵە پێشتر بەکارهاتووە";
+              break;
+            case 'auth/weak-password':
+              errorMessage.textContent = "وشەی نهێنی لاوازە، تکایە لانیکەم ٨ پیت بەکاربهێنە";
+              break;
+            case 'auth/invalid-email':
+              errorMessage.textContent = "فۆرماتی ئیمەیڵ هەڵەیە";
+              break;
+            default:
+              errorMessage.textContent = "هەڵەیەک ڕوویدا، تکایە دواتر هەوڵبدەوە";
+          }
+        });
+    }
+
+    // Expose Firebase auth to window for use in script.js
+    window.firebaseAuth = auth;
+    window.firebaseDb = db; // Expose db as well
+  </script>
+  
+  <style>
+    /* Additional styles for already logged in message */
+    .already-logged-in {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .already-logged-in p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .btn-secondary {
+      background-color: #f5f5f5;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e5e5e5;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+
+  <div class="container">
+    <div class="logo">
+      <div class="logo-container">
+        <div class="logo-star">
+        </div>
+      </div>
+      <div class="logo-text">ID Kurd AI</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab" onclick="switchTab('register')">
+        <span>چوونەژوورەوە</span>
+      </div>
+      <div class="tab active" onclick="switchTab('login')">
+        <span>تۆمارکردن</span>
+      </div>
+      <div class="tab-indicator"></div>
+    </div>
+
+    <div class="tab-contents">
+      <!-- Login Tab -->
+      <div class="tab-content active" id="login">
+        <div id="login-error" class="error-message" style="display:none;"></div>
+        <div class="input-group">
+          <label for="login-email">ئیمەیڵ</label>
+          <input type="email" id="login-email" placeholder="ئیمەیڵەکەت بنووسە" required>
+          <div class="input-icon">✉️</div>
+        </div>
+        <div class="input-group">
+          <label for="login-password">وشەی نهێنی</label>
+          <input type="password" id="login-password" placeholder="وشەی نهێنی خۆت بنووسە" required>
+          <div class="input-icon">🔒</div>
+        </div>
+        <button onclick="loginWithFirebase()" class="btn">چوونەژوورەوە بۆ ID Kurd AI</button>
+        <div class="forgot-password">
+          <a href="Forgotpass.html">وشەی نهێنیت لەبیرچووە؟</a>
+        </div>
+      </div>
+      
+      <!-- Register Tab -->
+      <div class="tab-content" id="register">
+        <div id="register-error" class="error-message" style="display:none;"></div>
+        
+        <div class="input-group">
+          <label for="register-fullname">ناوی تەواو</label>
+          <input type="text" id="register-fullname" placeholder="ناوی تەواوی خۆت بنووسە" required>
+          <div class="input-icon">👤</div>
+        </div>
+
+        <div class="input-group">
+          <label for="register-email">ئیمەیڵ</label>
+          <input type="email" id="register-email" placeholder="ئیمەیڵەکەت بنووسە" required>
+          <div class="input-icon">✉️</div>
+        </div>
+
+        <div class="input-group">
+          <label for="register-password">وشەی نهێنی</label>
+          <input type="password" id="register-password" placeholder="وشەی نهێنی دروست بکە" required>
+          <div class="input-icon">🔒</div>
+        </div>
+
+        <div class="input-group">
+          <label for="register-confirm-password">دووبارەکردنەوەی وشەی نهێنی</label>
+          <input type="password" id="register-confirm-password" placeholder="وشەی نهێنی دووبارە بکەوە" required>
+          <div class="input-icon">🔒</div>
+        </div>
+
+        <button onclick="registerWithFirebase()" class="btn">بەشداربوون لە ID Kurd AI</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="loginjs.js"></script>
+
+</body>
+</html>

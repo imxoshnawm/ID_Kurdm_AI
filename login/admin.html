@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Kurd AI - بەشی بەڕێوەبردن</title>
+  <link rel="stylesheet" href="publics/history/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+  
+  <!-- ناوبەر -->
+  <nav id="menu">
+    <div class="logo">ID Kurd AI</div>
+    <ul>
+      <li><a href="publics/menu.html"><i class="fas fa-home"></i>سەرەکی</a></li>
+      <li><a href="publics/about/about.html"><i class="fas fa-user"></i> دەربارە</a></li>
+      <li><a href="publics/translator/translator.html"><i class="fas fa-language"></i> وەرگێڕ</a></li>
+      <li><a href="publics/chatbot/menuchatbot.html"><i class="fas fa-comments"></i> چات بۆت</a></li>
+      <li><a href="publics/history/history.html"><i class="fas fa-history"></i> مێژوو</a></li>
+      <li><a href="admin.html" class="active"><i class="fas fa-cog"></i> بەڕێوەبردن</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container">
+    <div class="admin-container">
+      <div class="admin-header">
+        <div class="admin-title">بەشی بەڕێوەبردنی ID Kurd AI</div>
+        <button id="logoutBtn" class="admin-logout"><i class="fas fa-sign-out-alt"></i> چوونەدەرەوە</button>
+      </div>
+      
+      <!-- پەیامەکانی سیستەم -->
+      <div id="successAlert" class="alert alert-success"></div>
+      <div id="errorAlert" class="alert alert-error"></div>
+      
+      <!-- بارکردن -->
+      <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <div>چاوەڕوانبە...</div>
+      </div>
+      
+      <!-- تابەکانی بەڕێوەبردن -->
+      <div class="admin-tabs">
+        <div class="admin-tab active" data-tab="dashboard">داشبۆرد</div>
+        <div class="admin-tab" data-tab="users">بەکارهێنەران</div>
+        <div class="admin-tab" data-tab="content">ناوەڕۆک</div>
+        <div class="admin-tab" data-tab="settings">ڕێکخستنەکان</div>
+      </div>
+      
+      <!-- ناوەڕۆکی تابەکان -->
+      <div id="dashboard" class="tab-content active">
+        <h3>داشبۆردی بەڕێوەبردن</h3>
+        
+        <div class="stat-boxes">
+          <div class="stat-box">
+            <h3>کۆی بەکارهێنەران</h3>
+            <div id="totalUsers" class="stat-value">0</div>
+          </div>
+          <div class="stat-box">
+            <h3>بەکارهێنەرانی نوێ (دوا 7 ڕۆژ)</h3>
+            <div id="newUsers" class="stat-value">0</div>
+          </div>
+          <div class="stat-box">
+            <h3>بەکارهێنەرانی چالاک</h3>
+            <div id="activeUsers" class="stat-value">0</div>
+          </div>
+          <div class="stat-box">
+            <h3>سەردانەکان</h3>
+            <div id="pageViews" class="stat-value">0</div>
+          </div>
+        </div>
+        
+        <div class="admin-form">
+          <h3>زیادکردنی بەڕێوەبەری نوێ</h3>
+          <form id="addAdminForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adminEmail">ئیمەیڵی بەڕێوەبەر</label>
+                <input type="email" id="adminEmail" required placeholder="ئیمەیڵی بەکارهێنەر بنووسە">
+              </div>
+            </div>
+            <button type="submit" class="form-submit">زیادکردنی بەڕێوەبەر</button>
+          </form>
+        </div>
+      </div>
+      
+      <div id="users" class="tab-content">
+        <h3>بەڕێوەبردنی بەکارهێنەران</h3>
+        
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ناو</th>
+              <th>ئیمەیڵ</th>
+              <th>جۆری بەکارهێنەر</th>
+              <th>دوا چوونەژوورەوە</th>
+              <th>کردارەکان</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <!-- داتاکان لێرە دادەنرێن -->
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="content" class="tab-content">
+        <h3>بەڕێوەبردنی ناوەڕۆک</h3>
+        
+        <div class="admin-form">
+          <h3>زیادکردنی بابەتی نوێ بۆ مێژووی کوردستان</h3>
+          <form id="addHistoryContentForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="historyTitle">ناونیشان</label>
+                <input type="text" id="historyTitle" required placeholder="ناونیشانی بابەت">
+              </div>
+              <div class="form-group">
+                <label for="historyTag">تاگەکان</label>
+                <input type="text" id="historyTag" placeholder="تاگەکانی بابەت (بە کۆما جیابکەوە)">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="historyContent">ناوەڕۆک</label>
+                <textarea id="historyContent" required placeholder="ناوەڕۆکی بابەت لێرە بنووسە..."></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="historyImageURL">لینکی وێنە</label>
+                <input type="text" id="historyImageURL" placeholder="لینکی وێنەی بابەت بنووسە">
+              </div>
+            </div>
+            <button type="submit" class="form-submit">زیادکردنی بابەت</button>
+          </form>
+        </div>
+      </div>
+      
+      <div id="settings" class="tab-content">
+        <h3>ڕێکخستنەکانی سیستەم</h3>
+        
+        <div class="admin-form">
+          <h3>ڕێکخستنەکانی گشتی</h3>
+          <form id="generalSettingsForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="siteName">ناوی سایت</label>
+                <input type="text" id="siteName" placeholder="ناوی سایت" value="ID Kurd AI">
+              </div>
+              <div class="form-group">
+                <label for="defaultLanguage">زمانی سەرەتایی</label>
+                <select id="defaultLanguage">
+                  <option value="kurdish">کوردی</option>
+                  <option value="english">ئینگلیزی</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactEmail">ئیمەیڵی پەیوەندی</label>
+                <input type="email" id="contactEmail" placeholder="ئیمەیڵی پەیوەندی">
+              </div>
+            </div>
+            <button type="submit" class="form-submit">پاشەکەوتکردنی ڕێکخستنەکان</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- مۆداڵی دەستکاریکردنی بەکارهێنەر -->
+  <div id="editUserModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      
+      <h3>دەستکاریکردنی بەکارهێنەر</h3>
+      <form id="editUserForm">
+        <input type="hidden" id="editUserId">
+        <div class="form-group">
+          <label for="editFullName">ناوی تەواو</label>
+          <input type="text" id="editFullName" required>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">ئیمەیڵ</label>
+          <input type="email" id="editEmail" required disabled>
+        </div>
+        <div class="form-group">
+          <label for="editUserType">جۆری بەکارهێنەر</label>
+          <select id="editUserType">
+            <option value="standard">ئاسایی</option>
+            <option value="admin">بەڕێوەبەر</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">پاشەکەوتکردن</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- مۆداڵی سڕینەوەی بەکارهێنەر -->
+  <div id="deleteUserModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      
+      <h3>سڕینەوەی بەکارهێنەر</h3>
+      <p>ئایا دڵنیایت لە سڕینەوەی ئەم بەکارهێنەرە؟ ئەم کردارە ناتوانرێت بگەڕێنرێتەوە.</p>
+      <input type="hidden" id="deleteUserId">
+      <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+        <button id="confirmDeleteBtn" class="delete-user">بەڵێ، بیسڕەوە</button>
+        <button id="cancelDeleteBtn" style="background: #ccc; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">پاشگەزبوونەوە</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script> <!-- پێش admin.js -->
+<script src="admin.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

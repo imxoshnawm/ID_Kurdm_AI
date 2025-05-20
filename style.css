@@ -1,0 +1,521 @@
+body {
+  font-family: 'Roboto', 'Rabar', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  margin-left: 15px;
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); /* زەرد */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-star {
+  width: 75%;
+  height: 75%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  position: relative;
+  animation: shine 3s infinite alternate;
+}
+
+@keyframes shine {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #27ae60; /* کەسک */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 15px;
+}
+
+h1:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to left, #27ae60, #2ecc71); /* کەسک */
+  border-radius: 2px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  color: #2c3e50;
+  position: relative;
+  padding-right: 15px;
+}
+
+h2 i {
+  margin-left: 10px;
+  color: #27ae60; /* کەسک */
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #34495e;
+}
+
+p {
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.95); /* سپی */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2.5rem 0;
+}
+
+.feature {
+  flex: 1;
+  min-width: 250px;
+  padding: 1.5rem;
+  background: #fff; /* سپی */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: #27ae60; /* کەسک */
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 1.8rem;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); /* کەسک */
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.btn i {
+  margin-left: 8px;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); /* زەرد */
+  box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+  box-shadow: 0 6px 15px rgba(243, 156, 18, 0.4);
+}
+
+.large-btn {
+  padding: 1.2rem 2.5rem;
+  font-size: 1.1rem;
+}
+
+.action-buttons {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.small-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); /* زەرد */
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(243, 156, 18, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.small-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(243, 156, 18, 0.4);
+}
+
+.small-btn i {
+  margin-left: 5px;
+}
+
+.developers-section {
+  padding: 2rem 0;
+  margin: 2rem 0;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.developer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.developer-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  background: #fff; /* سپی */
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.developer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.developer-image-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #f5f5f5;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.developer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+.developer-card:hover .developer-image {
+  transform: scale(1.1);
+}
+
+.developer-title {
+  color: #27ae60; /* کەسک */
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.developer-info {
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.developer-info i {
+  margin-left: 5px;
+  color: #f1c40f; /* زەرد */
+}
+
+.supervisor {
+  border-top: 4px solid #27ae60; /* کەسک */
+}
+
+.tech-stack {
+  margin: 3rem 0;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+}
+
+.tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.tech-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #fff; /* سپی */
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  width: 100px;
+}
+
+.tech-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tech-icon i {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+  color: #f1c40f; /* زەرد */
+}
+
+.tech-icon span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.testimonial {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); /* کەسک */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+  color: white;
+  position: relative;
+}
+
+.testimonial:before {
+  content: "\201C";
+  font-size: 6rem;
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: serif;
+}
+
+.testimonial blockquote {
+  font-size: 1.2rem;
+  font-style: italic;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.call-to-action {
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%); /* زەرد */
+  padding: 2.5rem;
+  border-radius: 15px;
+  margin: 3rem 0;
+  text-align: center;
+  color: white;
+  box-shadow: 0 5px 20px rgba(243, 156, 18, 0.3);
+}
+
+.call-to-action h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.call-to-action p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.call-to-action .btn {
+  background: white; /* سپی */
+  color: #f39c12;
+}
+
+.call-to-action .btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.main-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #27ae60; /* کەسک */
+}
+
+.footer-links a {
+  margin-right: 1.5rem;
+  color: #7f8c8d;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #27ae60; /* کەسک */
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: #7f8c8d;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #27ae60; /* کەسک */
+  color: white; /* سپی */
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .features {
+    flex-direction: column;
+  }
+  
+  .feature {
+    min-width: 100%;
+  }
+  
+  .developer-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .developer-card {
+    min-width: 100%;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin: 1rem 0;
+  }
+  
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+/* ===== ئەنیمەیشن ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-section, .project-summary, .developers-section, .tech-stack, .testimonial, .call-to-action {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* ===== باگراوند - زیادکردنی ڕەنگەکانی کوردستان ===== */
+
+
+.stripe-white {
+  background: #ffffff; /* سپی */
+}
+
+.sun {
+  background: #f1c40f; /* زەرد */
+  box-shadow: 0 0 50px rgba(241, 196, 15, 0.6);
+}
+
+.mountain {
+  background: #27ae60; /* کەسک */
+}
+
+/* ===== فۆنتی کوردی ===== */
+@font-face {
+  font-family: 'Rabar';
+  src: url('https://cdn.jsdelivr.net/gh/fontmaster/kurdish-fonts@main/Rabar_013.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

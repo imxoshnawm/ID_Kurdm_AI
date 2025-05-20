@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>چات بۆت و مێژوو</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+  
+  <!-- ناوبەر -->
+  <nav id="menu">
+    <div class="logo">ID Kurdm AI</div>
+    <ul>
+      <li><a href="../../admin.html"><i class="fas fa-cog"></i> بەڕێوەبردن</a></li>
+      <li><a href="../history/history.html"><i class="fas fa-history"></i> مێژوو</a></li>
+      <li><a href="../chatbot/menuchatbot.html"><i class="fas fa-comments"></i> چات بۆت</a></li>
+      <li><a href="../translator/translator.html"><i class="fas fa-language"></i> وەرگێڕ</a></li>
+      <li><a href="../about/about.html"><i class="fas fa-user"></i> دەربارە</a></li>
+      <li><a href="../menu.html"><i class="fas fa-home"></i>سەرەکی</a></li>
+    </ul>
+  </nav>
+  
+  <div class="container" class="container section">
+    <h1>چات بۆت و مێژووی چات</h1>
+    
+    <div class="main-container">
+      <!-- Chat Section - Always on top -->
+      <div class="chat-section" id="chatSection">
+        <div class="section-header">
+          <h2>چات بۆت</h2>
+        </div>
+        <div class="chat-container">
+          <div id="chatMessages" class="chat-display">
+            <!-- پەیامەکان لێرە نیشان دەدرێن -->
+          </div>
+          <div class="chat-input-group">
+            <input type="text" id="chatInput" placeholder="پەیامەکەت بنووسە...">
+            <button id="sendBtn">ناردن</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- History Section - Always below chat -->
+      <div class="history-section" id="historySection">
+        <div class="section-header">
+          <h2>مێژووی چات</h2>
+        </div>
+        <div class="history-controls">
+
+        </div>
+        <div class="history-container">
+          <div id="historySessions" class="history-sessions">
+            <!-- دانیشتنەکانی چات لێرە نیشان دەدرێن -->
+            <p class="no-history-message">هیچ مێژوویەکی چات نییە</p>
+          </div>
+          
+          <div id="sessionMessages" class="session-messages">
+            <!-- پەیامەکانی دانیشتنی هەڵبژێردراو لێرە نیشان دەدرێن -->
+            <p class="select-session-message">تکایە دانیشتنێک هەڵبژێرە</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="design-note">   ID Kurd AI - تەکنەلۆژیای کوردی بۆ داهاتوویەکی گەشاوە </div>
+  </div>
+  
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>وەرگێڕی کوردی - ئینگلیزی</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+  <!-- Background Elements -->
+  <div class="background">
+    <div class="stripe-red"></div>
+    <div class="stripe-white"></div>
+    <div class="circuit-pattern"></div>
+    <div class="sun"></div>
+    <div class="mountain"></div>
+    <div class="particles" id="particles"></div>
+    <div id="data-streams"></div>
+  </div>
+  
+  <!-- ناوبەر -->
+  <nav id="menu">
+    <div class="logo">ID Kurdm AI</div>
+    <ul>
+      <li><a href="../menu.html"><i class="fas fa-home"></i>سەرەکی</a></li>
+      <li><a href="../about/about.html"><i class="fas fa-user"></i> دەربارە</a></li>
+      <li><a href="../translator/translator.html"><i class="fas fa-language"></i> وەرگێڕ</a></li>
+      <li><a href="../chatbot/menuchatbot.html"><i class="fas fa-comments"></i> چات بۆت</a></li>
+      <li><a href="../history/history.html"><i class="fas fa-history"></i> مێژوو</a></li>
+      <li><a href="../../admin.html"><i class="fas fa-cog"></i> بەڕێوەبردن</a></li>
+
+    </ul>
+  </nav>
+  
+
+  <div class="container section">
+    <h2>وەرگێڕی کوردی - ئینگلیزی</h2>
+    <div class="translator-container">
+      <div class="language-controls">
+        <button id="swapLanguages" class="btn-swap">
+          <span>🔄</span>
+        </button>
+        <div class="language-labels">
+          <span id="sourceLanguageLabel">کوردی</span>
+          <span>➞</span>
+          <span id="targetLanguageLabel">ئینگلیزی</span>
+        </div>
+      </div>
+      
+      <div class="translator">
+        <div class="input-group">
+          <textarea id="sourceText" placeholder="دەقی خۆت بنووسە..."></textarea>
+          <div class="text-controls">
+            <button id="clearSource" class="btn-clear">پاککردنەوە</button>
+          </div>
+        </div>
+        
+        <button id="translateBtn" class="btn">وەرگێڕان</button>
+        
+        <div class="input-group">
+          <textarea id="translatedText" placeholder="وەرگێڕاوی دەقەکەت لێرە دەردەکەوێت..." readonly></textarea>
+          <div class="text-controls">
+            <button id="copyTranslated" class="btn-copy">کۆپی</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="translation-history">
+        <h3>مێژووی وەرگێڕانەکان</h3>
+        <div id="historyItems" class="history-list">
+          <!-- JavaScript will populate this -->
+        </div>
+      </div>
+    </div>
+    <div class="design-note">ID Kurd AI - تەکنەلۆژیای کوردی بۆ داهاتوویەکی گەشاوە
+    </div>
+  </div>
+  
+  <script src="translator.js"></script>
+
+</body>
+</html>
